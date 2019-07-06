@@ -19,46 +19,43 @@ app.listen(port, () => {
 });
 
 app.post('/email', (req, res) => {
-    Joi.validate(req.body, schema, { abortEarly: false })
-        .then(validatedRes => {
-            const transporter = nodemailer.createTransport({
-                host: 'smtp.mailtrap.io',
-                port: 2525,
-                auth: {
-                    user: '3e1e214eb19222',
-                    pass: '89107021c50090'
-                }
-            });
+    const data = req.body;
+    // Joi.validate(data, schema, { abortEarly: false })
+    //     .then(validatedRes => {
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.mailtrap.io',
+        port: 2525,
+        auth: {
+            user: '3e1e214eb19222',
+            pass: '89107021c50090'
+        }
+    });
 
-            const mailOptions = {
-                from: req.body.email,
-                to: 'admin@mailer.com',
-                subject: 'A Test email message',
-                html: `<p>${req.body.name}</p>
-          <p>${req.body.email}</p>
-          <p>${req.body.message}</p>`
-                // from: 'test server ',
-                // to: req.body.email,
-                // subject: 'Email test',
-                // text: 'this is is an email test'
-            };
+    const mailOptions = {
+        from: data.email,
+        to: 'admin@mailer.com',
+        subject: 'A Test email message',
+        html: `<p>${data.name}</p>
+          <p>${data.email}</p>
+          <p>${data.message}</p>`
+    };
 
-            transporter.sendMail(mailOptions,
-                (error, res) => {
-                    if (error) {
-                        res.send({ error })
-                    } else {
-                        res.send({ message: 'Success' })
-                    }
-                    transporter.close();
-                });
-        })
-        .catch(validationError => {
-            const errorMessage = validationError.details[0].message
-            return res.status(400).send({
-                status: 400,
-                error: errorMessage
-            });
-        })
+    transporter.sendMail(mailOptions,
+        (error, response) => {
+            if (error) {
+                res.send({ error })
+            } else {
+                res.send({ message: `Message received, we'll get back to you` })
+            }
+            transporter.close();
+        });
+    // })
+    // .catch(validationError => {
+    //     const errorMessage = validationError.details[0].message
+    //     return res.status(400).send({
+    //         status: 400,
+    //         error: errorMessage
+    //     });
+    // })
 
 });
