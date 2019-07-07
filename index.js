@@ -9,7 +9,7 @@ const schema = require('./validations.js');
 const app = express();
 dotenv.config();
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
