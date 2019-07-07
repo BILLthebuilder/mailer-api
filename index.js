@@ -2,10 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const dotenv = require('dotenv');
 const Joi = require('@hapi/joi');
 const schema = require('./validations.js');
 
 const app = express();
+dotenv.config();
 
 const port = 8000;
 
@@ -18,6 +20,9 @@ app.listen(port, () => {
     console.log(`The app is listening on ${port}`);
 });
 
+app.get('/', (req, res) => {
+    res.json({ message: 'welcome to mailer-api' })
+})
 app.post('/email', (req, res) => {
     const data = req.body;
     // Joi.validate(data, schema, { abortEarly: false })
@@ -26,8 +31,8 @@ app.post('/email', (req, res) => {
         host: 'smtp.mailtrap.io',
         port: 2525,
         auth: {
-            user: '3e1e214eb19222',
-            pass: '89107021c50090'
+            user: process.env.MAILTRAP_USERNAME,
+            pass: process.env.MAILTRAP_PASSWORD,
         }
     });
 
