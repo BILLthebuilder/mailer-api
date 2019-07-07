@@ -31,6 +31,7 @@ app.post('/email', (req, res) => {
         host: 'smtp.mailtrap.io',
         port: 2525,
         auth: {
+            // configure your own mailtrap credentials or any other smtp host you would like to use
             user: process.env.MAILTRAP_USERNAME,
             pass: process.env.MAILTRAP_PASSWORD,
         }
