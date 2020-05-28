@@ -20,22 +20,13 @@ app.listen(port, () => {
     console.log(`The app is listening on ${port}`);
 });
 
-// app.get('/', (req, res) => {
-//     res.json({ message: 'welcome to mailer-api' })
-// })
 app.post('/email', (req, res) => {
-    // const { error } = Joi.validate(req.body, schema);
-    // if (error) {
-    //     return res.status(400).json({
-    //         error: error.details[0].message
-    //     });
-    // }
     const {email,subject,name,message} = req.body;
     const transporter = nodemailer.createTransport({
         host: 'mail.valuableantiquecollections.com',
         port: 465,
         auth: {
-            // configure your own mailtrap credentials or any other smtp host you would like to use
+            // configure your own credentials here 
             user: process.env.USERNAME,
             pass: process.env.PASSWORD,
         }
