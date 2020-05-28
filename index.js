@@ -34,7 +34,7 @@ app.post('/email', (req, res) => {
 
     const mailOptions = {
         from: email,
-        to: 'admin@mailer.com',
+        to: 'info@valuableantiquecollections.com',
         subject: subject,
         html: `<p>${name}</p>
           <p>${email}</p>
