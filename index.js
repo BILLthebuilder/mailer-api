@@ -24,26 +24,26 @@ app.get('/', (req, res) => {
     res.json({ message: 'welcome to mailer-api' })
 })
 app.post('/email', (req, res) => {
-    const data = req.body;
+    const {email,subject,name,message} = req.body;
     // Joi.validate(data, schema, { abortEarly: false })
     //     .then(validatedRes => {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.mailtrap.io',
-        port: 2525,
+        host: 'mail.valuableantiquecollections.com',
+        port: 465,
         auth: {
             // configure your own mailtrap credentials or any other smtp host you would like to use
-            user: process.env.MAILTRAP_USERNAME,
-            pass: process.env.MAILTRAP_PASSWORD,
+            user: process.env.USERNAME,
+            pass: process.env.PASSWORD,
         }
     });
 
     const mailOptions = {
-        from: data.email,
+        from: email,
         to: 'admin@mailer.com',
-        subject: 'A Test email message',
-        html: `<p>${data.name}</p>
-          <p>${data.email}</p>
-          <p>${data.message}</p>`
+        subject: subject,
+        html: `<p>${name}</p>
+          <p>${email}</p>
+          <p>${message}</p>`
     };
 
     transporter.sendMail(mailOptions,
