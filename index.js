@@ -20,13 +20,17 @@ app.listen(port, () => {
     console.log(`The app is listening on ${port}`);
 });
 
-app.get('/', (req, res) => {
-    res.json({ message: 'welcome to mailer-api' })
-})
+// app.get('/', (req, res) => {
+//     res.json({ message: 'welcome to mailer-api' })
+// })
 app.post('/email', (req, res) => {
+    // const { error } = Joi.validate(req.body, schema);
+    // if (error) {
+    //     return res.status(400).json({
+    //         error: error.details[0].message
+    //     });
+    // }
     const {email,subject,name,message} = req.body;
-    // Joi.validate(data, schema, { abortEarly: false })
-    //     .then(validatedRes => {
     const transporter = nodemailer.createTransport({
         host: 'mail.valuableantiquecollections.com',
         port: 465,
@@ -55,13 +59,5 @@ app.post('/email', (req, res) => {
             }
             transporter.close();
         });
-    // })
-    // .catch(validationError => {
-    //     const errorMessage = validationError.details[0].message
-    //     return res.status(400).send({
-    //         status: 400,
-    //         error: errorMessage
-    //     });
-    // })
 
 });
