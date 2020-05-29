@@ -36,9 +36,8 @@ app.post('/email', (req, res) => {
         from: email,
         to: 'info@valuableantiquecollections.com',
         subject: subject,
-        html: `<p>${name}</p>
-          <p>${email}</p>
-          <p>${message}</p>`
+        html: `<h1>${name}</h1>
+        <p>${message}</p>`
     };
 
     transporter.sendMail(mailOptions,
