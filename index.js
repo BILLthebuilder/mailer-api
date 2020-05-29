@@ -3,22 +3,23 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const serverless = require('serverless-http');
 const Joi = require('@hapi/joi');
 const schema = require('./validations.js');
 
 const app = express();
 dotenv.config();
 
-const port = process.env.PORT || 8000;
+// const port = process.env.PORT || 8000;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
-app.listen(port, () => {
-    console.log(`The app is listening on ${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`The app is listening on ${port}`);
+// });
 
 app.post('/email', (req, res) => {
     const {email,subject,name,message} = req.body;
@@ -51,3 +52,5 @@ app.post('/email', (req, res) => {
         });
 
 });
+
+module.exports.handler = serverless(app);
