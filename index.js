@@ -1,11 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const serverless = require('serverless-http');
-const Joi = require('@hapi/joi');
-const schema = require('./validations.js');
+
 
 const app = express();
 dotenv.config();
@@ -53,4 +50,3 @@ app.post('/email', (req, res) => {
 
 });
 
-module.exports.handler = serverless(app);
