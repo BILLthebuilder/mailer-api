@@ -9,6 +9,8 @@
     "dotenv": "^8.0.0",
     "eslint": "^6.0.1",
     "express": "^4.17.1",
+    "firebase-admin": "^8.12.1",
+    "firebase-functions": "^3.6.2",
     "nodemailer": "^6.2.1",
     "nodemon": "^1.19.1",
     "serverless-http": "^2.5.0"
